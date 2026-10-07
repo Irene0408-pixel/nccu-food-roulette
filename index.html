@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="政大午晚餐救星｜美食大輪盤，幫你快速決定今天吃什麼！" />
+  <title>政大午晚餐救星｜美食大輪盤</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">NCCU FOOD ROULETTE</p>
+        <h1>政大午晚餐救星<br><span>美食大輪盤</span></h1>
+        <p class="hero-subtitle">今天吃什麼？不要想了，讓命運幫你決定。🍚</p>
+      </div>
+      <div class="attempt-card">
+        <span>今日抽選次數</span>
+        <strong id="attemptCount">5</strong>
+        <small>次</small>
+      </div>
+    </header>
+
+    <main class="main-grid">
+      <section class="roulette-card card">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">LET FATE DECIDE</p>
+            <h2>今天吃這間！</h2>
+          </div>
+          <span class="status-pill" id="statusPill">準備開轉</span>
+        </div>
+
+        <div class="wheel-wrap">
+          <div class="pointer" aria-hidden="true"></div>
+          <canvas id="wheelCanvas" width="620" height="620" aria-label="美食選擇轉盤"></canvas>
+          <button class="spin-button" id="spinButton" type="button">
+            <span>開始</span>
+            <small>SPIN</small>
+          </button>
+        </div>
+
+        <div class="result-box" id="resultBox" aria-live="polite">
+          <span class="result-label">命運選中了</span>
+          <strong id="resultName">等待你的第一次抽選</strong>
+          <span id="resultHint">按下中央按鈕，看看今天的午餐／晚餐由誰接手。</span>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <section class="card list-card">
+          <div class="section-heading compact">
+            <div>
+              <p class="section-kicker">RESTAURANTS</p>
+              <h2>我的美食名單</h2>
+            </div>
+            <span id="storeCount">0 間</span>
+          </div>
+
+          <form class="add-form" id="addForm">
+            <input id="storeInput" type="text" maxlength="30" placeholder="輸入店家名稱…" autocomplete="off" />
+            <button type="submit">＋ 新增</button>
+          </form>
+
+          <div class="list-actions">
+            <button class="text-button" id="restoreButton" type="button">↻ 恢復預設名單</button>
+            <button class="text-button danger" id="clearButton" type="button">清空</button>
+          </div>
+
+          <ul class="store-list" id="storeList"></ul>
+          <p class="empty-state hidden" id="emptyState">目前沒有可抽選的店家，先新增一家吧！</p>
+        </section>
+
+        <section class="tip-card">
+          <div class="tip-icon">🍵</div>
+          <div>
+            <strong>選擇困難症處方箋</strong>
+            <p>勾選的店家才會參加轉盤。今天不想吃某家？關掉它就好，不用刪除。</p>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      <span>Made for NCCU students · 政大美食大輪盤</span>
+      <span>資料儲存在你的瀏覽器 LocalStorage</span>
+    </footer>
+  </div>
+
+  <!-- 7-ELEVEN 保底 Modal -->
+  <div class="modal-backdrop hidden" id="guaranteeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="guarantee-modal">
+      <button class="modal-close" id="modalClose" type="button" aria-label="關閉">×</button>
+      <div class="modal-emoji">🍙 🥤 🍱</div>
+      <p class="modal-kicker">LAST RESORT</p>
+      <h2 id="modalTitle">別再猶豫啦！</h2>
+      <p class="modal-copy">5 次機會全部用完，你還是沒有決定。<br><strong>沒救了，直接去小7吧！</strong></p>
+      <div class="convenience-card">
+        <span>今日保底答案</span>
+        <strong>7-ELEVEn</strong>
+        <small>便利商店也是一種選擇（真的）</small>
+      </div>
+      <div class="modal-actions">
+        <button class="primary-button" id="acceptSeven" type="button">認命接受，重新開始</button>
+        <button class="secondary-button" id="restartButton" type="button">刷新重新開始</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
